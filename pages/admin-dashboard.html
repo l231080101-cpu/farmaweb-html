@@ -1,3 +1,18 @@
+<style>
+    /* Intento por CSS: Oculta cualquier elemento que contenga el icono de carrito */
+    header i[data-lucide="shopping-cart"],
+    nav i[data-lucide="shopping-cart"],
+    .header-actions i[data-lucide="shopping-cart"],
+    button:has(i[data-lucide="shopping-cart"]) {
+        display: none !important;
+    }
+
+    /* Evitamos que se oculte el del panel de estadísticas */
+    .summary-card-icon.pedidos i[data-lucide="shopping-cart"] {
+        display: inline-block !important;
+    }
+</style>
+
 <div class="admin-dashboard-container">
     <div class="dashboard-header">
         <div>
@@ -88,45 +103,33 @@
                 <canvas id="monthlySalesChart"></canvas>
             </div>
         </div>
-        <div class="list-card">
-            <div class="list-card-header">
-                <h3>Productos Más Vendidos</h3>
-                <a href="#" class="link">Ver todos</a>
-            </div>
-            <div class="product-list" id="admin-best-sellers">
-                </div>
-        </div>
-        <div class="list-card">
-            <div class="list-card-header">
-                <h3>Pedidos Recientes</h3>
-                <a href="#" class="link">Ver todos</a>
-            </div>
-            <div class="order-list" id="admin-recent-orders">
-                 <div class="order-item">
-                    <div class="order-item-details">
-                        <strong>ORD-001 <span class="order-status-badge completed">Completado</span></strong>
-                        <span>María González</span>
-                        <span><i data-lucide="calendar" style="width:1rem;height:1rem; vertical-align: middle;"></i> 2025-09-30</span>
-                    </div>
-                    <span class="order-item-amount">$850</span>
-                </div>
-                <div class="order-item">
-                    <div class="order-item-details">
-                        <strong>ORD-002 <span class="order-status-badge pending">Pendiente</span></strong>
-                        <span>Carlos Ramírez</span>
-                        <span><i data-lucide="calendar" style="width:1rem;height:1rem; vertical-align: middle;"></i> 2025-09-30</span>
-                    </div>
-                    <span class="order-item-amount">$420</span>
-                </div>
-                <div class="order-item">
-                    <div class="order-item-details">
-                        <strong>ORD-003 <span class="order-status-badge in-progress">En Proceso</span></strong>
-                        <span>Ana Martínez</span>
-                        <span><i data-lucide="calendar" style="width:1rem;height:1rem; vertical-align: middle;"></i> 2025-09-29</span>
-                    </div>
-                    <span class="order-item-amount">$1250</span>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
+
+<script>
+    (function() {
+        function removeCartIcon() {
+            // Buscamos todos los iconos de carrito
+            const icons = document.querySelectorAll('i[data-lucide="shopping-cart"]');
+            icons.forEach(icon => {
+                // Si NO está dentro de una summary-card, lo eliminamos
+                if (!icon.closest('.summary-card')) {
+                    // Eliminamos el botón que lo contiene o el icono mismo
+                    const parentButton = icon.closest('button') || icon.closest('a');
+                    if (parentButton) {
+                        parentButton.style.display = 'none';
+                    } else {
+                        icon.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        // Ejecutar inmediatamente
+        removeCartIcon();
+        
+        // Ejecutar después de un segundo por si los iconos tardan en cargar
+        setTimeout(removeCartIcon, 500);
+        setTimeout(removeCartIcon, 2000);
+    })();
+</script>
