@@ -1,3 +1,19 @@
+<style>
+    /* Ocultamos el botón/icono de compras del encabezado global 
+       cuando este panel de administración esté presente */
+    header [data-lucide="shopping-cart"], 
+    nav [data-lucide="shopping-cart"],
+    .header-actions [data-lucide="shopping-cart"],
+    .cart-icon {
+        display: none !important;
+    }
+
+    /* Nos aseguramos de que el icono dentro de la tarjeta de resumen 
+       (el que está en "Pedidos") SÍ se mantenga visible */
+    .summary-card-icon.pedidos [data-lucide="shopping-cart"] {
+        display: inline-block !important;
+    }
+</style>
 <div class="admin-dashboard-container">
     <div class="dashboard-header">
         <div>
@@ -31,6 +47,7 @@
             <h2>$43,500</h2>
             <p>Ingresos Totales</p>
         </div>
+
         <div class="summary-card">
             <div class="summary-card-header">
                 <div class="summary-card-icon pedidos">
@@ -43,6 +60,7 @@
             <h2>125</h2>
             <p>Pedidos</p>
         </div>
+
         <div class="summary-card">
             <div class="summary-card-header">
                 <div class="summary-card-icon clientes">
@@ -55,6 +73,7 @@
             <h2>342</h2>
             <p>Clientes Activos</p>
         </div>
+
         <div class="summary-card">
             <div class="summary-card-header">
                 <div class="summary-card-icon ticket">
@@ -94,7 +113,7 @@
                 <a href="#" class="link">Ver todos</a>
             </div>
             <div class="product-list" id="admin-best-sellers">
-                </div>
+            </div>
         </div>
         <div class="list-card">
             <div class="list-card-header">
